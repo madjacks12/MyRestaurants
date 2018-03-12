@@ -1,15 +1,20 @@
 package com.epicodus.myrestaurants;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
+    private TextView mAppNameTextView;
     private static final String TAG = MainActivity.class.getSimpleName();
     private Button mFindRestaurantsButton;
     private EditText mLocationEditText;
@@ -19,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAppNameTextView= (TextView) findViewById(R.id.appNameTextView);
+        Typeface ostrichFont = Typeface.createFromAsset(getAssets(), "fonts/ostrich-regular.ttf");
+        mAppNameTextView.setTypeface(ostrichFont);
         mLocationEditText=(EditText) findViewById(R.id.locationEditText);
         mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantButton);
         mFindRestaurantsButton.setOnClickListener(new View.OnClickListener() {
