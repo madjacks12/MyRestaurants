@@ -37,4 +37,18 @@
         android:background="@color/colorAccent"
         android:textColor="@color/colorTextIcons"/>
 
+    <EditText
+        android:id="@+id/locationEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Zip Code"
+        android:layout_above="@+id/findRestaurantButton"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:background="@color/colorTextIcons"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="24dp" />
+
 </RelativeLayout>
