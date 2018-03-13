@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
                 intent.putExtra("location", location);
                 startActivity(intent);
+//                Log.d("activity", "get text in new intent");
             }
         });
     }
