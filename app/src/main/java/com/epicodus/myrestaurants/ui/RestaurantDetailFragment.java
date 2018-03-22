@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 
 
 public class RestaurantDetailFragment extends Fragment {
+    private static final int MAX_WIDTH = 400;
+    private static final int MAX_HEIGHT = 300;
     @BindView(R.id.restaurantImageView) ImageView mImageLabel;
     @BindView(R.id.restaurantNameTextView) TextView mNameLabel;
     @BindView(R.id.cuisineTextView) TextView mCategoriesLabel;
@@ -55,7 +57,11 @@ public class RestaurantDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
         ButterKnife.bind(this, view);
 
-        Picasso.with(view.getContext()).load(mRestaurant.getImageUrl()).into(mImageLabel);
+        Picasso.with(view.getContext())
+                .load(mRestaurant.getImageUrl())
+                .resize(MAX_WIDTH, MAX_HEIGHT)
+                .centerCrop()
+                .into(mImageLabel);
 
         mNameLabel.setText(mRestaurant.getName());
         mCategoriesLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getCategories()));
