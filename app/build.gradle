@@ -1,25 +1,43 @@
 apply plugin: 'com.android.application'
 
 android {
-    useLibrary 'org.apache.http.legacy'
     compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+    useLibrary 'org.apache.http.legacy'
+
     repositories {
         mavenCentral()
         jcenter()
     }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
         }
     }
+
     defaultConfig {
-        applicationId "com.epicodus.myrestaurant"
+        applicationId "com.epicodus.myrestaurants"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -56,4 +74,7 @@ dependencies {
     compile 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
     compile 'com.google.firebase:firebase-database:12.0.0'
+    compile 'com.firebaseui:firebase-ui-database:0.4.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
