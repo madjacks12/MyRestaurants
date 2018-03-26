@@ -3,9 +3,9 @@ package com.epicodus.myrestaurants.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +56,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
 }
-
-keytool -exportcert -list -v \
-        -alias <your-key-name> -keystore <path-to-production-keystore>
