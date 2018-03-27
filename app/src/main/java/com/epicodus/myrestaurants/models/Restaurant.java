@@ -20,14 +20,12 @@ public class Restaurant {
 
     public Restaurant() {}
 
-    public Restaurant(String name, String phone, String website,
-                      double rating, String imageUrl, ArrayList<String> address,
-                      double latitude, double longitude, ArrayList<String> categories) {
+    public Restaurant(String name, String phone, String website, double rating, String imageUrl, ArrayList<String> address, double latitude, double longitude, ArrayList<String> categories) {
         this.name = name;
         this.phone = phone;
         this.website = website;
         this.rating = rating;
-        this.imageUrl = getLargeImageUrl(imageUrl);
+        this.imageUrl = imageUrl;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -54,11 +52,6 @@ public class Restaurant {
         return imageUrl;
     }
 
-    public String getLargeImageUrl(String imageUrl) {
-        String largeImageUrl = imageUrl.substring(0, imageUrl.length() - 6).concat("o.jpg");
-        return largeImageUrl;
-    }
-
     public List<String> getAddress() {
         return address;
     }
@@ -82,4 +75,5 @@ public class Restaurant {
     public void setPushId(String pushId) {
         this.pushId = pushId;
     }
+
 }
