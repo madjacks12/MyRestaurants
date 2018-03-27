@@ -37,10 +37,10 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
     }
 
     public void bindRestaurant(Restaurant restaurant) {
-        ImageView restaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.restaurantNameTextView);
-        TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
-        TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
+        ImageView restaurantImageView = mView.findViewById(R.id.restaurantImageView);
+        TextView nameTextView = mView.findViewById(R.id.restaurantNameTextView);
+        TextView categoryTextView = mView.findViewById(R.id.categoryTextView);
+        TextView ratingTextView = mView.findViewById(R.id.ratingTextView);
 
         Picasso.with(mContext)
                 .load(restaurant.getImageUrl())
@@ -68,7 +68,7 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
                 int itemPosition = getLayoutPosition();
 
                 Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
+                intent.putExtra("position", itemPosition);
                 intent.putExtra("restaurants", Parcels.wrap(restaurants));
 
                 mContext.startActivity(intent);
