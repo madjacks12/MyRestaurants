@@ -3,7 +3,6 @@ package com.epicodus.myrestaurants.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +20,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-/**
- * Created by Guest on 3/20/18.
- */
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantViewHolder> {
     private ArrayList<Restaurant> mRestaurants = new ArrayList<>();
@@ -52,7 +47,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         return mRestaurants.size();
     }
 
-
     public class RestaurantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.restaurantImageView) ImageView mRestaurantImageView;
         @BindView(R.id.restaurantNameTextView) TextView mNameTextView;
@@ -79,7 +73,6 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
         public void bindRestaurant(Restaurant restaurant) {
             Picasso.with(mContext).load(restaurant.getImageUrl()).into(mRestaurantImageView);
-            Log.d("restaurant", restaurant.getImageUrl());
             mNameTextView.setText(restaurant.getName());
             mCategoryTextView.setText(restaurant.getCategories().get(0));
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
