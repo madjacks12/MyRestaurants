@@ -45,46 +45,16 @@ public class RestaurantListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
-
-        getRestaurants(location);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getRestaurants(mRecentAddress);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        ButterKnife.bind(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                addToSharedPreferences(query);
-                getRestaurants(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        return true;
+//        Intent intent = getIntent();
+//        String location = intent.getStringExtra("location");
+//
+//        getRestaurants(location);
+//
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getRestaurants(mRecentAddress);
+//        }
     }
 
     @Override
@@ -123,9 +93,7 @@ public class RestaurantListActivity extends AppCompatActivity {
         });
     }
 
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-    }
+
 
 }
 
