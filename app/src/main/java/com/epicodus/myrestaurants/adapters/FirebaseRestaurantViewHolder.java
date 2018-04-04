@@ -4,7 +4,10 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
@@ -34,7 +38,7 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
 
     View mView;
     Context mContext;
-    public ImageView restaurantImageView;
+    public ImageView mRestaurantImageView;
 
     public FirebaseRestaurantViewHolder(View itemView) {
         super(itemView);
@@ -43,22 +47,33 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
     }
 
     public void bindRestaurant(Restaurant restaurant) {
-        restaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
-        TextView nameTextView = mView.findViewById(R.id.restaurantNameTextView);
-        TextView categoryTextView = mView.findViewById(R.id.categoryTextView);
-        TextView ratingTextView = mView.findViewById(R.id.ratingTextView);
+        mRestaurantImageView = (ImageView) mView.findViewById(R.id.restaurantImageView);
+        TextView mNameTextView = mView.findViewById(R.id.restaurantNameTextView);
+        TextView mCategoryTextView = mView.findViewById(R.id.categoryTextView);
+        TextView mRatingTextView = mView.findViewById(R.id.ratingTextView);
 
-        Picasso.with(mContext)
-                .load(restaurant.getImageUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(restaurantImageView);
+        if (!restaurant.getImageUrl().contains("http")) {
+            try {
+                Bitmap imageBitmap = decodeFromFirebaseBase64(restaurant.getImageUrl());
+                mRestaurantImageView.setImageBitmap(imageBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Picasso.with(mContext)
+                    .load(restaurant.getImageUrl())
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerCrop()
+                    .into(mRestaurantImageView);
 
-        nameTextView.setText(restaurant.getName());
-        categoryTextView.setText(restaurant.getCategories().get(0));
-        ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+            mNameTextView.setText(restaurant.getName());
+            mCategoryTextView.setText(restaurant.getCategories().get(0));
+            mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+        }
+        mNameTextView.setText(restaurant.getName());
+        mCategoryTextView.setText(restaurant.getCategories().get(0));
+        mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
     }
-
     @Override
     public void onItemSelected() {
         AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.drag_scale_on);
@@ -80,6 +95,11 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder implem
 //                .alpha(1f)
 //                .scaleX(1f)
 //                .scaleY(1f);
+    }
+
+    public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
+        byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
     }
 }
 
